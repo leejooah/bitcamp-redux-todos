@@ -8,7 +8,6 @@ const REMOVE = 'todos/REMOVE'
 
 export const changeInput = createAction(CHANGE_INPUT, input => input)
 let id =3
-
 export const insert = createAction(INSERT, text => ({id : id++, text, done : false}))
 export const toggle = createAction(TOGGLE, id => id)
 export const remove = createAction(REMOVE, id => id)
@@ -29,9 +28,9 @@ const initState = {
     ]
 }
 
-const todos = handleActions({
-        [CHANGE_INPUT]: (state, {payload: input}) => produce(state, draft => draft.input = input),
-        [INSERT]: (state, {payload: todo}) => produce(state, draft => draft.todos.push(todo)),
+const todosReducer = handleActions({
+        [CHANGE_INPUT]: (state, action) => produce(state, draft =>{draft.input = action.payload} ),
+        [INSERT]: (state, {payload: todo}) => produce(state, draft => {draft.todos.push(todo)}),
         [TOGGLE]: (state, {payload: id}) =>
             produce(state, draft => {
                 const todo = draft.todos.find(todo => todo.id === id)
@@ -44,5 +43,5 @@ const todos = handleActions({
     }
 , initState)
 
-export default todos
+export default todosReducer
 
